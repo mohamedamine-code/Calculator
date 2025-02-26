@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:calculator/button.dart';
+import 'package:calculator/imgButton.dart';
 import 'package:flutter/material.dart';
 
 class Pagehome extends StatelessWidget {
@@ -24,7 +26,7 @@ class Pagehome extends StatelessWidget {
       '2',
       '3',
       '+',
-      '',
+      'asset/img/216118_calculator_icon.png',
       '0',
       ',',
       '=',
@@ -47,11 +49,10 @@ class Pagehome extends StatelessWidget {
         home: Scaffold(
             body: Column(
       children: [
-        Expanded(
-            flex: 1,
-            child: Container(
-              color: Colors.black,
-            )),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.4,
+          color: Colors.black,
+        ),
         Container(
           color: Colors.black, // Couleur de fond du GridView
           child: SizedBox(
@@ -61,7 +62,7 @@ class Pagehome extends StatelessWidget {
               padding: EdgeInsets.only(
                 left: 10,
                 right: 10,
-                top: 40,
+                top: 25,
               ),
               itemCount: l1.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -71,24 +72,31 @@ class Pagehome extends StatelessWidget {
               ),
               itemBuilder: (context, index) {
                 return Container(
-                  decoration: BoxDecoration(
-                    color: isOperator(l1[index])
-                        ? Colors.amber[900]
-                        : Colors.grey[200],
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Center(
-                    child: Text(
-                      l1[index],
-                      style: TextStyle(fontSize: 25),
-                    ),
-                  ),
+                  child: isOperator(l1[index])?
+                  
+                  Button(ColorButton: const Color.fromARGB(255, 195, 88, 0), textButton: l1[index], textColor: Colors.white)
+
+                  :(l1[index] =='AC')?
+                  Button(ColorButton: const Color.fromARGB(255, 167, 3, 3), textButton: l1[index], textColor: const Color.fromARGB(255, 253, 253, 253))
+
+                  :(l1[index]=='asset/img/216118_calculator_icon.png')?
+
+                  
+                  
+                  Imgbutton(ColorButton: const Color.fromARGB(255, 195, 88, 0) , textButton: l1[index], widthb: 50,heidthb: 50,)
+                  
+
+                  :Button(ColorButton: const Color.fromARGB(255, 255, 255, 255), textButton: l1[index], textColor: Colors.black),
+
                 );
-              },
+              }
             ),
-          ),
+    )
+    )
+      ]
+    )
         ),
-      ],
-    )));
+    );
+
   }
 }
